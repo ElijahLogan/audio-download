@@ -10,7 +10,7 @@ app.listen(PORT, () => {
 	console.log(`Server Works !!! At port ${PORT}`);
 });
 
-app.get('/downloadmp3', async (req, res, next) => {
+app.get('/downloadmp3', async (req, res) => {
 	try {
 		var url = req.query.url;
 		if(!ytdl.validateURL(url)) {
@@ -44,9 +44,7 @@ app.get('/downloadmp4', async (req, res, next) => {
 		}
 		let title = 'video';
 
-		await ytdl.getBasicInfo(url, {
-			format: 'mp4'
-		}, (err, info) => {
+		await ytdl.getBasicInfo(url, (err, info) => {
 			title = info.player_response.videoDetails.title.replace(/[^\x00-\x7F]/g, "");
 		});
 

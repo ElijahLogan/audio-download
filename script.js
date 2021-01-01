@@ -2,8 +2,11 @@ let Btn = document.getElementById('btn');
 let URLinput = document.querySelector('.URL-input');
 let select = document.querySelector('.opt');
 let serverURL = 'http://localhost:4000';
-
+document.getElementById("myBtn").addEventListener("click", function() {
+	alert("Hello World!");
+  });
 Btn.addEventListener('click', () => {
+
 	if (!URLinput.value) {
 		alert('Enter YouTube URL');
 	} else {
@@ -15,16 +18,35 @@ Btn.addEventListener('click', () => {
 	}
 });
 
-async function downloadMp3(query) {
+
+
+async function retrieveMp3(query){
 	const res = await fetch(`${serverURL}/downloadmp3?url=${query}`);
+	return res
+}
+
+function accessMp3(result){
+/*
+const res = await fetch(`${serverURL}/downloadmp3?url=${query}`);
 	if(res.status == 200) {
 		var a = document.createElement('a');
-  		a.href = `${serverURL}/downloadmp3?url=${query}`;
+		a.href = `${serverURL}/downloadmp3?url=${query}`;
   		a.setAttribute('download', '');
 		a.click();
+		console.log(a.href)
 	} else if(res.status == 400) {
 		alert("Invalid url");
-	}
+	}*/
+	
+}
+
+async function downloadMp3(query) {
+		const res = await retrieveMp3(query)
+		let a = res.then(r => {return r } )
+		console.log(a)
+
+
+
 }
 
 async function downloadMp4(query) {
